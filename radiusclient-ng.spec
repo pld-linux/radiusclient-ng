@@ -2,7 +2,7 @@ Summary:	Radiusclient library and tools
 Summary(pl.UTF-8):	Biblioteka radiusclient oraz narzędzia
 Name:		radiusclient-ng
 Version:	0.5.5
-Release:	1
+Release:	2
 License:	BSD-like
 Group:		Libraries
 Source0:	http://ftp.iptel.org/pub/radiusclient-ng/%{name}-%{version}.tar.gz
@@ -10,6 +10,7 @@ Source0:	http://ftp.iptel.org/pub/radiusclient-ng/%{name}-%{version}.tar.gz
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
+Requires:	%{name}-libs = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -28,11 +29,23 @@ pliku (/etc/passwd, /etc/shadow). W przeciwieństwie do nich
 Radiusclient używa także protokołu RADIUS w celu uwierzytelnienia
 użytkownika.
 
+%package libs
+Summary:	Radius client implementation
+Summary(pl.UTF-8):	Implementacja klienta radius
+Group:		Libraries
+Requires:	%{name}-libs = %{version}-%{release}
+
+%description libs
+Radius client implementation library.
+
+%description libs -l pl.UTF-8
+Biblioteka implementująca klienta protokołu Radius.
+
 %package devel
-Summary:	Header files for radiusclient library
-Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki radiusclient
+Summary:	Header files for radiusclient-ng library
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki radiusclient-ng
 Group:		Development/Libraries
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}-libs = %{version}-%{release}
 
 %description devel
 Header files for radiusclient library.
@@ -74,13 +87,16 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-p /sbin/ldconfig
-%postun	-p /sbin/ldconfig
+%post	libs -p /sbin/ldconfig
+%postun	libs -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
 %doc BUGS CHANGES COPYRIGHT README* doc/*.html
 %attr(755,root,root) %{_sbindir}/*
+
+%files libs
+%defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libradiusclient-ng.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libradiusclient-ng.so.2
 %attr(750,root,root) %dir %{_sysconfdir}/radiusclient-ng
