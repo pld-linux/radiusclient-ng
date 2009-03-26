@@ -2,7 +2,7 @@ Summary:	Radiusclient library and tools
 Summary(pl.UTF-8):	Biblioteka radiusclient oraz narzędzia
 Name:		radiusclient-ng
 Version:	0.5.5
-Release:	2
+Release:	3
 License:	BSD-like
 Group:		Libraries
 Source0:	http://ftp.iptel.org/pub/radiusclient-ng/%{name}-%{version}.tar.gz
@@ -34,6 +34,7 @@ Summary:	Radius client implementation
 Summary(pl.UTF-8):	Implementacja klienta radius
 Group:		Libraries
 Requires:	%{name}-libs = %{version}-%{release}
+Conflicts:	radiusclient-ng < 0.5.5-2
 
 %description libs
 Radius client implementation library.
