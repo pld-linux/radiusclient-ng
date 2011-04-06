@@ -1,12 +1,21 @@
+#
+# Note: this project is no longer maintained. Its developers moved to
+# freeradius-client, which, while it hasn't seen a release since 2008,
+# contains (a) newer code and (b) is part of an actively maintained
+# project that accepts patches, so it might see a release in the
+# future. Unfortunately, while opensips supports freeradius-client,
+# asterisk doesn't, so it doesn't make much sense to switch. At least
+# not yet.
+#
 Summary:	Radiusclient library and tools
 Summary(pl.UTF-8):	Biblioteka radiusclient oraz narzędzia
 Name:		radiusclient-ng
-Version:	0.5.5
-Release:	3
+Version:	0.5.6
+Release:	1
 License:	BSD-like
 Group:		Libraries
-Source0:	http://ftp.iptel.org/pub/radiusclient-ng/%{name}-%{version}.tar.gz
-# Source0-md5:	77b7b4bff09da195750710afbed8cef9
+Source0:	http://download.berlios.de/radiusclient-ng/%{name}-%{version}.tar.gz
+# Source0-md5:	6fb7d4d0aefafaee7385831ac46a8e9c
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
