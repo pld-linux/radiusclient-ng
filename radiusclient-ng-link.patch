@@ -1,0 +1,22 @@
+--- radiusclient-ng-0.5.6/configure.in.orig	2007-07-24 02:19:22.000000000 +0200
++++ radiusclient-ng-0.5.6/configure.in	2014-01-05 17:56:22.984401597 +0100
+@@ -53,8 +53,8 @@
+ )
+ 
+ dnl Checks for libraries.
+-AC_CHECK_LIB(nsl, gethostbyname)
+-AC_CHECK_LIB(socket, socket)
++AC_SEARCH_LIBS(gethostbyname, nsl)
++AC_SEARCH_LIBS(socket, socket)
+ if test "$shadow_passwords" = "yes"
+ then
+ 	AC_CHECK_LIB(c, getspnam,:,
+@@ -63,7 +63,7 @@
+                 )
+ 	)
+ fi
+-AC_CHECK_LIB(crypt, crypt)
++AC_SEARCH_LIBS(crypt, crypt)
+ 
+ dnl Checks for endianness
+ AC_C_BIGENDIAN

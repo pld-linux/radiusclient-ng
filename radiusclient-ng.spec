@@ -16,6 +16,8 @@ License:	BSD-like
 Group:		Libraries
 Source0:	http://download.berlios.de/radiusclient-ng/%{name}-%{version}.tar.gz
 # Source0-md5:	6fb7d4d0aefafaee7385831ac46a8e9c
+Patch0:		%{name}-link.patch
+URL:		http://developer.berlios.de/projects/radiusclient-ng/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
@@ -77,15 +79,17 @@ Statyczna biblioteka Radiusclient.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
+%{__autoheader}
 %{__automake}
 %configure \
-	--enable-shadow \
-	--enable-scp
+	--enable-scp \
+	--enable-shadow
 %{__make}
 
 %install
@@ -103,20 +107,33 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc BUGS CHANGES COPYRIGHT README* doc/*.html
-%attr(755,root,root) %{_sbindir}/*
+%attr(755,root,root) %{_sbindir}/login.radius
+%attr(755,root,root) %{_sbindir}/radacct
+%attr(755,root,root) %{_sbindir}/radexample
+%attr(755,root,root) %{_sbindir}/radiusclient
+%attr(755,root,root) %{_sbindir}/radlogin
+%attr(755,root,root) %{_sbindir}/radstatus
 
 %files libs
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libradiusclient-ng.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libradiusclient-ng.so.2
 %attr(750,root,root) %dir %{_sysconfdir}/radiusclient-ng
-%attr(640,root,root) %config(missingok,noreplace) %verify(not md5 mtime size) %{_sysconfdir}/radiusclient-ng/*
+%attr(640,root,root) %config(missingok,noreplace) %verify(not md5 mtime size) %{_sysconfdir}/radiusclient-ng/dictionary
+%attr(640,root,root) %config(missingok,noreplace) %verify(not md5 mtime size) %{_sysconfdir}/radiusclient-ng/dictionary.ascend
+%attr(640,root,root) %config(missingok,noreplace) %verify(not md5 mtime size) %{_sysconfdir}/radiusclient-ng/dictionary.compat
+%attr(640,root,root) %config(missingok,noreplace) %verify(not md5 mtime size) %{_sysconfdir}/radiusclient-ng/dictionary.merit
+%attr(640,root,root) %config(missingok,noreplace) %verify(not md5 mtime size) %{_sysconfdir}/radiusclient-ng/dictionary.sip
+%attr(640,root,root) %config(missingok,noreplace) %verify(not md5 mtime size) %{_sysconfdir}/radiusclient-ng/issue
+%attr(640,root,root) %config(missingok,noreplace) %verify(not md5 mtime size) %{_sysconfdir}/radiusclient-ng/port-id-map
+%attr(640,root,root) %config(missingok,noreplace) %verify(not md5 mtime size) %{_sysconfdir}/radiusclient-ng/radiusclient.conf
+%attr(640,root,root) %config(missingok,noreplace) %verify(not md5 mtime size) %{_sysconfdir}/radiusclient-ng/servers
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libradiusclient-ng.so
 %{_libdir}/libradiusclient-ng.la
-%{_includedir}/*.h
+%{_includedir}/radiusclient-ng.h
 
 %files static
 %defattr(644,root,root,755)
