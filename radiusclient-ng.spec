@@ -44,7 +44,6 @@ użytkownika.
 Summary:	Radius client implementation
 Summary(pl.UTF-8):	Implementacja klienta radius
 Group:		Libraries
-Requires:	%{name}-libs = %{version}-%{release}
 Conflicts:	radiusclient-ng < 0.5.5-2
 
 %description libs
