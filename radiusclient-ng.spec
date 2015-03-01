@@ -11,7 +11,7 @@ Summary:	Radiusclient library and tools
 Summary(pl.UTF-8):	Biblioteka radiusclient oraz narzędzia
 Name:		radiusclient-ng
 Version:	0.5.6
-Release:	1
+Release:	2
 License:	BSD-like
 Group:		Libraries
 Source0:	http://download.berlios.de/radiusclient-ng/%{name}-%{version}.tar.gz
